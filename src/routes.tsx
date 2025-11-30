@@ -21,6 +21,10 @@ export const router = createBrowserRouter([
         element: <CoffeePage />,
       },
       {
+        path: "/coffeepage",
+        element: <CoffeePage />,
+      },
+      {
         path: "inspo",
         element: <InspoPage />,
       },
