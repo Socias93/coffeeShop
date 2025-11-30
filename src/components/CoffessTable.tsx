@@ -35,7 +35,7 @@ function CoffeesTable({ onDelete, recipes, onLike }: Props) {
               <p className="small mb-0">{r.description}</p>
               <div className="d-flex justify-content-between m-4">
                 <button
-                  onClick={() => navigate("viewcoffee")}
+                  onClick={() => navigate(`/viewcoffee/${r.id}`)}
                   className="rounded-2"
                   style={{
                     width: "40%",

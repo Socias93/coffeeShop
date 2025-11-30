@@ -1,4 +1,7 @@
-export type Category = { id: string; name: string };
+export interface Category {
+  id: string;
+  name: string;
+}
 
 const categories: Category[] = [
   { id: "espresso", name: "Espresso" },

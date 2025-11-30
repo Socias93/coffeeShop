@@ -19,7 +19,7 @@ function AllRecipesPage() {
             {recipes.map((r) => (
               <tr key={r.id}>
                 <td>{r.title} </td>
-                <td>{r.categoryId}</td>
+                <td>{r.category?.name}</td>
                 <td>{r.ingredients}</td>
                 <td>{r.description}</td>
                 <td>{r.steps}</td>

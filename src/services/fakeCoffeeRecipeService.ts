@@ -1,3 +1,5 @@
+import { Category } from "./fakeCategoryService";
+
 export type Recipe = {
   id: string;
   title: string;
@@ -5,9 +7,19 @@ export type Recipe = {
   ingredients: string[];
   steps: string[];
   imageUrl: string;
-  categoryId?: string;
+  category?: Category;
   liked?: boolean;
 };
+
+export interface RecipeData {
+  id?: string;
+  title: string;
+  description: string;
+  ingredients: string;
+  category: Category;
+  steps?: string;
+  image?: string;
+}
 
 let recipes: Recipe[] = [
   {
@@ -21,7 +33,8 @@ let recipes: Recipe[] = [
     ],
     steps: ["Brew espresso", "Steam milk", "Spoon foam on top"],
     imageUrl: "/bilder/cappuccino.jpg",
-    categoryId: "milk",
+    category: { id: "specialty", name: "Specialty" },
+
     liked: true,
   },
   {
@@ -31,7 +44,7 @@ let recipes: Recipe[] = [
     ingredients: ["18g ground coffee", "Water 92–96°C"],
     steps: ["Tamp firmly", "Extract 25–30s"],
     imageUrl: "/bilder/espresso.webp",
-    categoryId: "espresso",
+    category: { id: "espresso", name: "Espresso" },
     liked: false,
   },
   {
@@ -41,7 +54,8 @@ let recipes: Recipe[] = [
     ingredients: ["80g coarse coffee", "1L cold water"],
     steps: ["Combine", "Steep 12–18h", "Filter & serve over ice"],
     imageUrl: "/bilder/coldbrew.webp",
-    categoryId: "cold",
+    category: { id: "cold", name: "Cold" },
+
     liked: false,
   },
   {
@@ -56,7 +70,8 @@ let recipes: Recipe[] = [
       "Top with thin foam",
     ],
     imageUrl: "/bilder/latte2.jpg",
-    categoryId: "milk",
+    category: { id: "milk", name: "Milk Based" },
+
     liked: false,
   },
 ];
@@ -86,10 +101,8 @@ export function saveRecipe(
     recipeInDb.title = recipe.title;
     recipeInDb.description = recipe.description ?? recipeInDb.description;
     recipeInDb.ingredients = recipe.ingredients ?? recipeInDb.ingredients;
-    recipeInDb.steps = recipe.steps ?? recipeInDb.steps;
     recipeInDb.imageUrl = recipe.imageUrl ?? recipeInDb.imageUrl;
-    recipeInDb.categoryId = recipe.categoryId ?? recipeInDb.categoryId;
-    recipeInDb.liked = recipe.liked ?? recipeInDb.liked;
+    recipeInDb.category = recipe.category ?? recipeInDb.category;
     return recipeInDb;
   }
 
@@ -100,7 +113,7 @@ export function saveRecipe(
     ingredients: recipe.ingredients ?? [],
     steps: recipe.steps ?? [],
     imageUrl: recipe.imageUrl,
-    categoryId: recipe.categoryId,
+    category: recipe.category,
     liked: !!recipe.liked,
   };
 
