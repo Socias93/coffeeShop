@@ -6,8 +6,12 @@ import BeansPage from "./pages/BeansPage";
 import RecipesPage from "./pages/RecipesPage";
 import ViewCoffeePage from "./pages/ViewCoffePage";
 import AllRecipesPage from "./pages/AllRecipesPage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
+import NotfoundPage from "./pages/NotFoundPage";
 
 export const router = createBrowserRouter([
+  { path: "*", element: <NotfoundPage /> },
   {
     path: "/",
     element: <App />,
@@ -28,18 +32,20 @@ export const router = createBrowserRouter([
         path: "recipes",
         element: <RecipesPage />,
       },
+      {
+        path: "viewcoffee",
+        element: <ViewCoffeePage />,
+      },
+      {
+        path: "viewcoffee/:id",
+        element: <ViewCoffeePage />,
+      },
+      {
+        path: "allrecipes",
+        element: <AllRecipesPage />,
+      },
+      { path: "about", element: <AboutPage /> },
+      { path: "contact", element: <ContactPage /> },
     ],
-  },
-  {
-    path: "/viewcoffee",
-    element: <ViewCoffeePage />,
-  },
-  {
-    path: "/viewcoffee/:id",
-    element: <ViewCoffeePage />,
-  },
-  {
-    path: "/allrecipes",
-    element: <AllRecipesPage />,
   },
 ]);
