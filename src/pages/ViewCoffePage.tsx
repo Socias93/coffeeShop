@@ -1,19 +1,12 @@
-import { useParams } from "react-router-dom";
-import z from "zod";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-const schema = z.object({
-  title: z.string().min(1, { message: "Title is mandatory" }),
-  decription: z.string().min(1, { message: "Decription is required" }),
-  ingredients: z.string().min(1, { message: "Decription is required" }),
-  image: z.string().min(1, { message: "Image is required" }),
-});
-
-type formData = z.infer<typeof schema>;
+import { formData, schema } from "./schemas/CoffesSchema";
+import { saveRecipe } from "../services/fakeCoffeeRecipeService";
 
 function ViewCoffeePage() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -22,6 +15,8 @@ function ViewCoffeePage() {
 
   function onSubmit(data: formData) {
     console.log("Submitted", data);
+    saveRecipe(data);
+    navigate("/");
   }
 
   return (
@@ -34,37 +29,62 @@ function ViewCoffeePage() {
             alt="Coffee Picture"
           />
         </div>
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="col vh-100 d-grid justify-content-center align-content-center">
-          {id === "new" ? (
-            <h4 className="mb-3"> Create a Recipe </h4>
-          ) : (
-            <h4> Recipe {id} </h4>
-          )}
+        <div className="col vh-100 d-grid justify-content-center align-content-center">
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="w-100"
+            style={{ maxWidth: 700 }}>
+            {id === "new" ? (
+              <h4 className="mb-3">Create a Recipe</h4>
+            ) : (
+              <h4>Recipe {id}</h4>
+            )}
 
-          <div className="p-5 shadow rounded-4">
-            <div className="d-grid justify-content-center">
-              <label className="form-label text-light">Title</label>
-              <input className="form-control" />
+            <div className="shadow rounded-4 p-4 bg-dark">
+              <div className="mb-3">
+                <label className="form-label text-light">Title</label>
+                <input {...register("title")} className="form-control" />
+                {errors.title && (
+                  <p className="text-danger">{errors.title.message}</p>
+                )}
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label text-light">Description</label>
+                <input {...register("description")} className="form-control" />
+                {errors.description && (
+                  <p className="text-danger">{errors.description.message}</p>
+                )}
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label text-light">Ingredients</label>
+                <input {...register("ingredients")} className="form-control" />
+                {errors.ingredients && (
+                  <p className="text-danger">{errors.ingredients.message}</p>
+                )}
+              </div>
+
+              <div className="mb-3">
+                <label className="form-label text-light">Image</label>
+                <input
+                  {...register("imageUrl")}
+                  type="text"
+                  className="form-control"
+                />
+                {errors.imageUrl && (
+                  <p className="text-danger">{errors.imageUrl.message}</p>
+                )}
+              </div>
+
+              <div className="text-center mt-3">
+                <button type="submit" className="btn btn-outline-light">
+                  Save
+                </button>
+              </div>
             </div>
-            <div className="d-grid justify-content-center">
-              <label className="form-label text-light">Decription</label>
-              <input className="form-control" />
-            </div>
-            <div className="d-grid justify-content-center">
-              <label className="form-label text-light">Ingredients</label>
-              <input className="form-control" />
-            </div>
-            <div className="d-grid justify-content-center">
-              <label className="form-label text-light">Image</label>
-              <input className="form-control" />
-            </div>
-            <div className="text-center mt-4">
-              <button className="btn btn-outline-light">Save</button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </>
   );

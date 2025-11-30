@@ -4,8 +4,8 @@ export type Recipe = {
   id: string;
   title: string;
   description: string;
-  ingredients: string[];
-  steps: string[];
+  ingredients?: string;
+  steps?: string;
   imageUrl: string;
   category?: Category;
   liked?: boolean;
@@ -14,8 +14,8 @@ export type Recipe = {
 export interface RecipeData {
   id?: string;
   title: string;
-  description: string;
-  ingredients: string;
+  description: string[];
+  ingredients: string[];
   category: Category;
   steps?: string;
   image?: string;
@@ -26,12 +26,9 @@ let recipes: Recipe[] = [
     id: "1",
     title: "Cappuccino",
     description: "Espresso, steamed milk, foam.",
-    ingredients: [
-      "1/3 cup espresso",
-      "1/3 cup steamed milk",
-      "1/3 cup milk foam",
-    ],
-    steps: ["Brew espresso", "Steam milk", "Spoon foam on top"],
+    ingredients: "1/3 cup espresso  1/3 cup steamed milk 1/3 cup milk foam",
+
+    steps: "Brew espresso Steam milk Spoon foam on top",
     imageUrl: "/bilder/cappuccino.jpg",
     category: { id: "specialty", name: "Specialty" },
 
@@ -41,8 +38,8 @@ let recipes: Recipe[] = [
     id: "2",
     title: "Espresso",
     description: "Rich and concentrated shot.",
-    ingredients: ["18g ground coffee", "Water 92–96°C"],
-    steps: ["Tamp firmly", "Extract 25–30s"],
+    ingredients: "18g ground coffee Water 92–96°C",
+    steps: "Tamp firmly Extract 25–30s",
     imageUrl: "/bilder/espresso.webp",
     category: { id: "espresso", name: "Espresso" },
     liked: false,
@@ -51,8 +48,8 @@ let recipes: Recipe[] = [
     id: "3",
     title: "Cold Brew",
     description: "Smooth, low-acidity cold extraction.",
-    ingredients: ["80g coarse coffee", "1L cold water"],
-    steps: ["Combine", "Steep 12–18h", "Filter & serve over ice"],
+    ingredients: "80g coarse coffee 1L cold water",
+    steps: "Combine Steep 12–18h Filter & serve over ice",
     imageUrl: "/bilder/coldbrew.webp",
     category: { id: "cold", name: "Cold" },
 
@@ -62,13 +59,9 @@ let recipes: Recipe[] = [
     id: "4",
     title: "Latte",
     description: "Espresso,steamed milk and foam.",
-    ingredients: ["1 shot espresso", "200ml steamed milk", "Thin milk foam"],
-    steps: [
-      "Brew espresso",
-      "Steam milk",
-      "Pour milk over espresso",
-      "Top with thin foam",
-    ],
+    ingredients: "1 shot espresso 200ml steamed milk Thin milk foam",
+    steps:
+      "Brew espresso Steam milk Pour milk over espresso Top with thin foam",
     imageUrl: "/bilder/latte2.jpg",
     category: { id: "milk", name: "Milk Based" },
 
@@ -110,8 +103,8 @@ export function saveRecipe(
     id: Date.now().toString(),
     title: recipe.title,
     description: recipe.description ?? "",
-    ingredients: recipe.ingredients ?? [],
-    steps: recipe.steps ?? [],
+    ingredients: recipe.ingredients,
+    steps: recipe.steps,
     imageUrl: recipe.imageUrl,
     category: recipe.category,
     liked: !!recipe.liked,
