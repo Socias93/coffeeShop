@@ -1,17 +1,19 @@
-import { createBrowserRouter } from "react-router-dom";
 import App from "./App";
-import InspoPage from "./pages/InspoPage";
-import CoffeePage from "./pages/CoffeePage";
-import BeansPage from "./pages/BeansPage";
-import RecipesPage from "./pages/RecipesPage";
-import ViewCoffeePage from "./pages/ViewCoffePage";
-import AllRecipesPage from "./pages/AllRecipesPage";
-import AboutPage from "./pages/AboutPage";
-import ContactPage from "./pages/ContactPage";
-import NotfoundPage from "./pages/NotFoundPage";
+import { createBrowserRouter } from "react-router-dom";
+import {
+  AboutPage,
+  AllRecipesPage,
+  BeansPage,
+  CoffeePage,
+  ContactPage,
+  InspoPage,
+  NotFoundPage,
+  RecipesPage,
+  ViewCoffeePage,
+} from "./pages/index";
 
 export const router = createBrowserRouter([
-  { path: "*", element: <NotfoundPage /> },
+  { path: "*", element: <NotFoundPage /> },
   {
     path: "/",
     element: <App />,

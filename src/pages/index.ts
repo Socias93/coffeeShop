@@ -1,0 +1,9 @@
+export { default as AboutPage } from "./AboutPage";
+export { default as AllRecipesPage } from "./AllRecipesPage";
+export { default as BeansPage } from "./BeansPage";
+export { default as CoffeePage } from "./CoffeePage";
+export { default as ContactPage } from "./ContactPage";
+export { default as InspoPage } from "./InspoPage";
+export { default as NotFoundPage } from "./NotFoundPage";
+export { default as RecipesPage } from "./RecipesPage";
+export { default as ViewCoffeePage } from "./ViewCoffeePage";

@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Recipe } from "../services/fakeCoffeeRecipeService";
-import Favorite from "./Favorite";
+import { Favorite } from "./index";
 
 interface Props {
   onDelete(id: string): void;

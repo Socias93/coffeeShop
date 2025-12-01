@@ -1,8 +1,6 @@
 import { useState } from "react";
-import { getRecipes } from "../services/fakeCoffeeRecipeService";
-import CoffeeInfo from "../components/CoffeeInfo";
-import CoffeesTable from "../components/CoffessTable";
-import HeaderImage from "../components/HeaderImage";
+import { deleteRecipe, getRecipes } from "../services/fakeCoffeeRecipeService";
+import { HeaderImage, CoffeeInfo, CoffeessTable } from "../components/index";
 import { useOutletContext } from "react-router-dom";
 
 function CoffeePage() {
@@ -12,6 +10,7 @@ function CoffeePage() {
   function handleDelete(id: string) {
     const newRecipy = recipes.filter((r) => r.id !== id);
     setRecipes(newRecipy);
+    deleteRecipe(id);
   }
 
   function handleLike(id: string) {
@@ -31,7 +30,7 @@ function CoffeePage() {
     <>
       <HeaderImage />
       <CoffeeInfo />
-      <CoffeesTable
+      <CoffeessTable
         onDelete={handleDelete}
         recipes={filtredRecipes}
         onLike={handleLike}

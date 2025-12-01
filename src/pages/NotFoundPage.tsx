@@ -1,6 +1,6 @@
 import { NavLink } from "react-router-dom";
 
-function NotfoundPage() {
+function NotFoundPage() {
   return (
     <div className="vh-100 grid justify-content-center">
       <h1 className="text-center">404 page not found</h1>;
@@ -13,4 +13,4 @@ function NotfoundPage() {
   );
 }
 
-export default NotfoundPage;
+export default NotFoundPage;
