@@ -1,6 +1,7 @@
 import z from "zod";
 
 export const schema = z.object({
+  id: z.string().optional(),
   title: z
     .string({ error: "You need to add a title" })
     .min(1, { message: "Title is mandatory" }),

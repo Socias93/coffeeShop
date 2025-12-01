@@ -2,16 +2,42 @@ import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formData, schema } from "./schemas/CoffesSchema";
-import { saveRecipe } from "../services/fakeCoffeeRecipeService";
+import {
+  getRecipe,
+  Recipe,
+  saveRecipe,
+} from "../services/fakeCoffeeRecipeService";
+import { useEffect, useState } from "react";
 
 function ViewCoffeePage() {
   const { id } = useParams();
+  const [recipe, setRecipe] = useState<Recipe>();
   const navigate = useNavigate();
   const {
+    reset,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<formData>({ resolver: zodResolver(schema) });
+
+  useEffect(() => {
+    if (!id || id === "new") return;
+    const recipe = getRecipe(id);
+
+    if (!recipe) return;
+
+    reset(mapToFormData(recipe));
+  }, []);
+
+  function mapToFormData(recipe: Recipe) {
+    return {
+      id: recipe.id,
+      title: recipe.title,
+      description: recipe.description,
+      ingredients: recipe.ingredients,
+      imageUrl: recipe.imageUrl,
+    };
+  }
 
   function onSubmit(data: formData) {
     console.log("Submitted", data);
