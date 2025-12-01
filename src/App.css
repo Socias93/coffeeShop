@@ -7,3 +7,12 @@
   color: #e5e7eb;
   min-height: 100vh;
 }
+
+.vertical-text {
+  writing-mode: vertical-rl; /* vertikalt från höger till vänster */
+  text-orientation: upright; /* håller bokstäver upprätta */
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: 0.05rem;
+  line-height: 1;
+}
