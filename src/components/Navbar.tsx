@@ -53,6 +53,14 @@ function Navbar({ onChange, value }: Props) {
                   Contact
                 </NavLink>
               </li>
+              <li className="nav-item">
+                <NavLink
+                  to={"/viewcoffee/new"}
+                  className="nav-link"
+                  style={{ color }}>
+                  New recipe
+                </NavLink>
+              </li>
             </ul>
             <SearchBox onChange={onChange} value={value} />
           </div>
