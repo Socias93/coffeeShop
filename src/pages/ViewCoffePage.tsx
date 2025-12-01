@@ -26,6 +26,8 @@ function ViewCoffeePage() {
 
     if (!recipe) return;
 
+    setRecipe(recipe);
+
     reset(mapToFormData(recipe));
   }, []);
 
@@ -49,11 +51,19 @@ function ViewCoffeePage() {
     <>
       <div className="row bg-dark text-center">
         <div className="col">
-          <img
-            className="vh-100"
-            src="/bilder/4coffee.webp"
-            alt="Coffee Picture"
-          />
+          {id === "new" ? (
+            <img
+              className="vh-100 w-100"
+              src="/bilder/4coffee.webp"
+              alt="Coffee Picture"
+            />
+          ) : (
+            <img
+              className="vh-100 w-100"
+              src={recipe?.imageUrl}
+              alt="Coffee Picture"
+            />
+          )}
         </div>
         <div className="col vh-100 d-grid justify-content-center align-content-center">
           <form
