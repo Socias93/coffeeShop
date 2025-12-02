@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { schema, videoData } from "./schemas/VideoSchema";
 import { useForm } from "react-hook-form";
+import VideoHeaderImage from "./VideoHeaderImage";
 
 function ViewVideoPage() {
   const {
@@ -11,10 +12,7 @@ function ViewVideoPage() {
 
   return (
     <>
-      <img
-        style={{ width: "100%", height: "45vh" }}
-        src="/bilder/newnewcoffee.jpg"
-        alt="Coffee Background image"></img>
+      <VideoHeaderImage />
       <div className="d-flex justify-content-center">
         <form>
           <div className="m-4 p-5 shadow rounded-5">
