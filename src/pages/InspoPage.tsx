@@ -36,7 +36,7 @@ function InspoPage() {
                 style={{ minHeight: 320, minWidth: 350 }}>
                 <div className="position-relative">
                   <img
-                    src={video.thumbnailUrl}
+                    src={video.imgaeUrl}
                     alt="Coffee image"
                     className="img-fluid w-100 rounded-3"
                     style={{ height: 150, objectFit: "cover" }}
