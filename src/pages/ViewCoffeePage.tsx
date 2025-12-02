@@ -21,15 +21,27 @@ function ViewCoffeePage() {
   } = useForm<formData>({ resolver: zodResolver(schema) });
 
   useEffect(() => {
-    if (!id || id === "new") return;
-    const recipe = getRecipe(id);
+    if (!id) return;
 
+    if (id === "new") {
+      // När vi skapar nytt recept: nollställ state + formuläret
+      setRecipe(undefined);
+      reset({
+        id: "",
+        title: "",
+        description: "",
+        ingredients: "",
+        imageUrl: "",
+      });
+      return;
+    }
+
+    const recipe = getRecipe(id);
     if (!recipe) return;
 
     setRecipe(recipe);
-
     reset(mapToFormData(recipe));
-  }, []);
+  }, [reset, id]);
 
   function mapToFormData(recipe: Recipe) {
     return {
@@ -73,7 +85,6 @@ function ViewCoffeePage() {
                   <h4>Category - {recipe?.category?.name}</h4>
                   <h5>Description - {recipe?.description}</h5>
                   <span>Ingredients - {recipe?.ingredients}</span>
-                  <p>Steps - {recipe?.steps}</p>
                 </div>
               </>
             )}
