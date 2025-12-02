@@ -24,7 +24,6 @@ function ViewCoffeePage() {
     if (!id) return;
 
     if (id === "new") {
-      // När vi skapar nytt recept: nollställ state + formuläret
       setRecipe(undefined);
       reset({
         id: "",
