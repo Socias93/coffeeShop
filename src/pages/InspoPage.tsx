@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { getVideos } from "../services/fakeInspoService";
+import { useNavigate } from "react-router-dom";
 
 function InspoPage() {
   const [videos, setVideos] = useState(getVideos());
+  const navigate = useNavigate();
 
   function onDelete(id: string) {
     const newVideo = videos.filter((video) => video.id !== id);
@@ -14,7 +16,9 @@ function InspoPage() {
       <div className="vh-100 d-grid justify-content-center align-content-center">
         <h2>There are no videos in the database</h2>
         <div className="text-center mt-2">
-          <button className="btn btn-outline-light">
+          <button
+            onClick={() => navigate("/viewcoffee/new/video")}
+            className="btn btn-outline-light">
             Create new viedo inspo
           </button>
         </div>

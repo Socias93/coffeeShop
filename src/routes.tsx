@@ -39,13 +39,14 @@ export const router = createBrowserRouter([
         element: <RecipesPage />,
       },
       {
-        path: "viewcoffee",
+        path: "viewcoffee/new/video",
         element: <ViewCoffeePage />,
       },
       {
         path: "viewcoffee/:id",
         element: <ViewCoffeePage />,
       },
+
       {
         path: "allrecipes",
         element: <AllRecipesPage />,
