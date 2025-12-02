@@ -7,3 +7,4 @@ export { default as InspoPage } from "./InspoPage";
 export { default as NotFoundPage } from "./NotFoundPage";
 export { default as RecipesPage } from "./RecipesPage";
 export { default as ViewCoffeePage } from "./ViewCoffeePage";
+export { default as ViewVideoPage } from "./ViewVideoPage";

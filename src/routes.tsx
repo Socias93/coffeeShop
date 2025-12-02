@@ -10,6 +10,7 @@ import {
   NotFoundPage,
   RecipesPage,
   ViewCoffeePage,
+  ViewVideoPage,
 } from "./pages/index";
 
 export const router = createBrowserRouter([
@@ -39,8 +40,8 @@ export const router = createBrowserRouter([
         element: <RecipesPage />,
       },
       {
-        path: "viewcoffee/new/video",
-        element: <ViewCoffeePage />,
+        path: "create/new/video",
+        element: <ViewVideoPage />,
       },
       {
         path: "viewcoffee/:id",

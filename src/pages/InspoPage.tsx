@@ -17,7 +17,7 @@ function InspoPage() {
         <h2>There are no videos in the database</h2>
         <div className="text-center mt-2">
           <button
-            onClick={() => navigate("/viewcoffee/new/video")}
+            onClick={() => navigate("/create/new/video")}
             className="btn btn-outline-light">
             Create new viedo inspo
           </button>
