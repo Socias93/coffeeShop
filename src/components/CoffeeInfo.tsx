@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function CoffeeInfo() {
   return (
-    <div className="d-flex justify-content-center gap-5 my-3">
+    <div className="d-flex justify-content-center gap-2  gap-md-5 gap-lg-5 my-3">
       <div className="text-center">
         <i className="fa-regular fa-face-smile"></i>
         <Link

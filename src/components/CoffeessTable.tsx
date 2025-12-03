@@ -14,7 +14,7 @@ function CoffeesTable({ onDelete, recipes, onLike }: Props) {
   return (
     <>
       <div className="container-lg px-3 py-3">
-        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 g-4 justify-content-center">
+        <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 g-4 justify-content-center">
           {recipes.map((r) => (
             <div key={r.id} className="justify-content-center">
               <div className="p-3 border border-dark rounded-4 m-3">
