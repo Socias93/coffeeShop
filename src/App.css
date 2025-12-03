@@ -9,10 +9,29 @@
 }
 
 .vertical-text {
-  writing-mode: vertical-rl; /* vertikalt från höger till vänster */
-  text-orientation: upright; /* håller bokstäver upprätta */
+  writing-mode: vertical-rl;
+  text-orientation: upright;
   font-size: 2rem;
   font-weight: 700;
   letter-spacing: 0.05rem;
   line-height: 1;
+}
+
+.hero-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  max-height: none;
+}
+
+@media (max-width: 700px) {
+  .hero-img {
+    max-height: 220px;
+  }
+}
+
+@media (min-width: 701px) {
+  .hero-img {
+    max-height: 420px;
+  }
 }

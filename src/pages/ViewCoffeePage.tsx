@@ -61,14 +61,13 @@ function ViewCoffeePage() {
   return (
     <>
       <div className="app-container bg-dark">
-        <div className="row">
-          <div className="col-md-5 d-flex flex-column align-items-center mb-3 mb-md-0">
+        <div className="row gy-4">
+          <div className="col-12 col-md-5 d-grid flex-column align-items-center mb-3 mb-md-0 ">
             {id === "new" ? (
               <img
-                className="w-100 shadow-lg rounded-4 mb-3"
-                src="/bilder/4coffee.webp"
+                className="img-fluid shadow-lg rounded-4 mb-3 hero-img"
+                src={recipe?.imageUrl ?? "/bilder/4coffee.webp"}
                 alt="Coffee Picture"
-                style={{ objectFit: "cover" }}
               />
             ) : (
               <>
@@ -89,24 +88,28 @@ function ViewCoffeePage() {
             )}
           </div>
 
-          <div className="col-md-2 d-flex align-items-center justify-content-center">
+          <div className="col-12 col-md-2 d-none d-md-flex align-items-center justify-content-center">
             <div className="vertical-text text-light text-center">
               COFFEESHOP
             </div>
           </div>
 
-          <div className="col-md-5 d-flex justify-content-center">
+          <div className="col-12 col-md-5 d-grid justify-content-center">
             <form
               onSubmit={handleSubmit(onSubmit)}
               className="w-100"
               style={{ maxWidth: 700 }}>
               {id === "new" ? (
-                <h4 className="mb-3 mt-4 text-light">Create a Recipe</h4>
+                <h4 className="mb-3 mt-4 text-light text-center">
+                  Create a Recipe
+                </h4>
               ) : (
-                <h4 className="mt-4 text-light">Recipe {id}</h4>
+                <h4 className="mt-4 text-light text-center">Recipe {id}</h4>
               )}
 
-              <div className="shadow-lg rounded-4 p-4 bg-dark">
+              <div
+                className="d-grid shadow-lg rounded-4 p-4 bg-dark justify-content-center"
+                style={{ maxWidth: 350 }}>
                 <div className="mb-3">
                   <label className="form-label text-light">Title</label>
                   <input {...register("title")} className="form-control" />
@@ -150,9 +153,15 @@ function ViewCoffeePage() {
                 </div>
 
                 <div className="text-center mt-3">
-                  <button type="submit" className="btn btn-outline-light">
-                    Save
-                  </button>
+                  {id === "new" ? (
+                    <button type="submit" className="btn btn-outline-light">
+                      Save
+                    </button>
+                  ) : (
+                    <button type="submit" className="btn btn-outline-light">
+                      Update
+                    </button>
+                  )}
                 </div>
               </div>
             </form>
