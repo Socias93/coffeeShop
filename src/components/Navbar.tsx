@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { SearchBox } from "./index";
+import NavbarButtom from "./NavbarButtom";
 
 interface Props {
   value: string;
@@ -15,7 +16,7 @@ function Navbar({ onChange, value }: Props) {
         .placeholder-white::placeholder { color: #fff; opacity: 1; }
 `}</style>
       <nav
-        className="navbar navbar-expand-lg border-0 shadow-none"
+        className="navbar navbar-expand-lg border-0 shadow-none body-tertiary"
         style={{
           backgroundColor: "#121212",
         }}>
@@ -27,6 +28,7 @@ function Navbar({ onChange, value }: Props) {
           <NavLink to={"/"} className="navbar-brand" style={{ color }}>
             Coffee Shop
           </NavLink>
+          <NavbarButtom />
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
               <li className="nav-item">
