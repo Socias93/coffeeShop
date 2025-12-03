@@ -8,6 +8,7 @@ import {
   Recipe,
   saveRecipe,
 } from "../services/fakeCoffeeRecipeService";
+import CoffeeForm from "../components/CoffeForm";
 
 function ViewCoffeePage() {
   const { id } = useParams();
@@ -60,111 +61,49 @@ function ViewCoffeePage() {
 
   return (
     <>
-      <div className="app-container bg-dark">
-        <div className="row gy-4">
-          <div className="col-12 col-md-5 d-grid flex-column align-items-center mb-3 mb-md-0 ">
-            {id === "new" ? (
-              <img
-                className="img-fluid shadow-lg rounded-4 mb-3 hero-img"
-                src={recipe?.imageUrl ?? "/bilder/4coffee.webp"}
-                alt="Coffee Picture"
-              />
-            ) : (
-              <>
-                <img
-                  className="w-100 shadow-lg rounded-4 mb-3"
-                  src={recipe?.imageUrl}
-                  alt="Coffee Picture"
-                  style={{ objectFit: "cover", maxHeight: "400px" }}
-                />
-
-                <div className="p-3 shadow-lg rounded-4 w-100">
-                  <h2>Title - {recipe?.title}</h2>
-                  <h4>Category - {recipe?.category?.name}</h4>
-                  <h5>Description - {recipe?.description}</h5>
-                  <span>Ingredients - {recipe?.ingredients}</span>
-                </div>
-              </>
-            )}
-          </div>
-
-          <div className="col-12 col-md-2 d-none d-md-flex align-items-center justify-content-center">
-            <div className="vertical-text text-light text-center">
-              COFFEESHOP
-            </div>
-          </div>
-
-          <div className="col-12 col-md-5 d-grid justify-content-center">
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              className="w-100"
-              style={{ maxWidth: 700 }}>
+      <div className="app-container bg-dark w-100">
+        <div className="container-fluid">
+          <div className="row gy-4">
+            <div className="col-12 col-md-5 d-grid flex-column align-items-center mb-3 mb-md-0 ">
               {id === "new" ? (
-                <h4 className="mb-3 mt-4 text-light text-center">
-                  Create a Recipe
-                </h4>
+                <img
+                  className="img-fluid shadow-lg rounded-4 mb-3 hero-img"
+                  src={recipe?.imageUrl ?? "/bilder/4coffee.webp"}
+                  alt="Coffee Picture"
+                />
               ) : (
-                <h4 className="mt-4 text-light text-center">Recipe {id}</h4>
+                <>
+                  <img
+                    className="w-100 shadow-lg rounded-4 mb-3"
+                    src={recipe?.imageUrl}
+                    alt="Coffee Picture"
+                    style={{ objectFit: "cover", maxHeight: "400px" }}
+                  />
+
+                  <div className="p-3 shadow-lg rounded-4 w-100">
+                    <h2>Title - {recipe?.title}</h2>
+                    <h4>Category - {recipe?.category?.name}</h4>
+                    <h5>Description - {recipe?.description}</h5>
+                    <span>Ingredients - {recipe?.ingredients}</span>
+                  </div>
+                </>
               )}
+            </div>
 
-              <div
-                className="d-grid shadow-lg rounded-4 p-4 bg-dark justify-content-center"
-                style={{ maxWidth: 350 }}>
-                <div className="mb-3">
-                  <label className="form-label text-light">Title</label>
-                  <input {...register("title")} className="form-control" />
-                  {errors.title && (
-                    <p className="text-danger">{errors.title.message}</p>
-                  )}
-                </div>
-
-                <div className="mb-3">
-                  <label className="form-label text-light">Description</label>
-                  <input
-                    {...register("description")}
-                    className="form-control"
-                  />
-                  {errors.description && (
-                    <p className="text-danger">{errors.description.message}</p>
-                  )}
-                </div>
-
-                <div className="mb-3">
-                  <label className="form-label text-light">Ingredients</label>
-                  <input
-                    {...register("ingredients")}
-                    className="form-control"
-                  />
-                  {errors.ingredients && (
-                    <p className="text-danger">{errors.ingredients.message}</p>
-                  )}
-                </div>
-
-                <div className="mb-3">
-                  <label className="form-label text-light">Image</label>
-                  <input
-                    {...register("imageUrl")}
-                    type="text"
-                    className="form-control"
-                  />
-                  {errors.imageUrl && (
-                    <p className="text-danger">{errors.imageUrl.message}</p>
-                  )}
-                </div>
-
-                <div className="text-center mt-3">
-                  {id === "new" ? (
-                    <button type="submit" className="btn btn-outline-light">
-                      Save
-                    </button>
-                  ) : (
-                    <button type="submit" className="btn btn-outline-light">
-                      Update
-                    </button>
-                  )}
-                </div>
+            <div className="col-12 col-md-2 d-none d-md-flex align-items-center justify-content-center">
+              <div className="vertical-text text-light text-center">
+                COFFEESHOP
               </div>
-            </form>
+            </div>
+            <div className="col-12 col-md-5 d-grid justify-content-center">
+              <CoffeeForm
+                onSubmit={onSubmit}
+                errors={errors}
+                handleSubmit={handleSubmit}
+                id={id}
+                register={register}
+              />
+            </div>
           </div>
         </div>
       </div>
