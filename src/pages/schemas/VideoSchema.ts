@@ -5,7 +5,7 @@ export const schema = z.object({
   videoUrl: z.string().min(1, {
     message: "Videourl is required",
   }),
-  imgaeUrl: z.string().min(1, { message: "Imageurl is required" }),
+  imageUrl: z.string().min(1, { message: "Imageurl is required" }),
 });
 
 export type videoData = z.infer<typeof schema>;

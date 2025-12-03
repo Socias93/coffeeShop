@@ -14,6 +14,10 @@ function ViewVideoPage() {
     console.log("Submitted", data);
   }
 
+  const inputErrors = `form-control bg-${
+    errors.title ? "danger-subtle" : "dark"
+  } ${errors.title ? "" : "text-white"}`;
+
   return (
     <>
       <VideoHeaderImage />
@@ -26,9 +30,7 @@ function ViewVideoPage() {
               </label>
               <input
                 {...register("title")}
-                className={`form-control bg-${
-                  errors.title ? "danger-subtle" : "dark"
-                }`}
+                className={inputErrors}
                 type="text"
               />
               {errors.title && (
@@ -41,9 +43,7 @@ function ViewVideoPage() {
               </label>
               <input
                 {...register("videoUrl")}
-                className={`form-control bg-${
-                  errors.title ? "danger-subtle" : "dark"
-                }`}
+                className={inputErrors}
                 type="text"
               />
               {errors.videoUrl && (
@@ -55,14 +55,12 @@ function ViewVideoPage() {
                 Image
               </label>
               <input
-                {...register("imgaeUrl")}
-                className={`form-control bg-${
-                  errors.title ? "danger-subtle" : "dark"
-                }`}
+                {...register("imageUrl")}
+                className={inputErrors}
                 type="text"
               />
-              {errors.imgaeUrl && (
-                <p className="text-danger">{errors.imgaeUrl.message} </p>
+              {errors.imageUrl && (
+                <p className="text-danger">{errors.imageUrl.message} </p>
               )}
             </div>
             <div className="text-center mt-4">
