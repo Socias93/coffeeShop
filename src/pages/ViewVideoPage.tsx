@@ -2,8 +2,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { schema, videoData } from "./schemas/VideoSchema";
 import { useForm } from "react-hook-form";
 import VideoHeaderImage from "./VideoHeaderImage";
+import { useNavigate } from "react-router-dom";
+import { saveVideo } from "../services/fakeInspoService";
 
 function ViewVideoPage() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -12,6 +15,8 @@ function ViewVideoPage() {
 
   function onSubmit(data: videoData) {
     console.log("Submitted", data);
+    saveVideo(data);
+    navigate("/inspo");
   }
 
   const inputErrors = `form-control bg-${

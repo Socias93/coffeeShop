@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getVideos } from "../services/fakeInspoService";
+import { deleteVideo, getVideos } from "../services/fakeInspoService";
 import { useNavigate } from "react-router-dom";
 
 function InspoPage() {
@@ -9,6 +9,7 @@ function InspoPage() {
   function onDelete(id: string) {
     const newVideo = videos.filter((video) => video.id !== id);
     setVideos(newVideo);
+    deleteVideo(id);
   }
 
   if (videos.length === 0)
@@ -19,7 +20,7 @@ function InspoPage() {
           <button
             onClick={() => navigate("/create/new/video")}
             className="btn btn-outline-light">
-            Create new viedo inspo
+            Create new video inspo
           </button>
         </div>
       </div>
@@ -36,7 +37,7 @@ function InspoPage() {
                 style={{ minHeight: 320, minWidth: 350 }}>
                 <div className="position-relative">
                   <img
-                    src={video.imgaeUrl}
+                    src={video.imageUrl}
                     alt="Coffee image"
                     className="img-fluid w-100 rounded-3"
                     style={{ height: 150, objectFit: "cover" }}
@@ -70,6 +71,13 @@ function InspoPage() {
             </div>
           ))}
         </div>
+      </div>
+      <div className="text-center">
+        <button
+          onClick={() => navigate("/create/new/video")}
+          className="btn btn-outline-secondary w-25">
+          Create new inspo
+        </button>
       </div>
     </>
   );
