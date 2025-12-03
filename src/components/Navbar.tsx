@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { SearchBox, NavbarButtom } from "./index";
+import { SearchBox, NavbarButtom, NavbarLi } from "./index";
 
 interface Props {
   value: string;
@@ -30,38 +30,7 @@ function Navbar({ onChange, value }: Props) {
           <NavbarButtom />
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav">
-              <li className="nav-item">
-                <NavLink
-                  to={"/coffeepage"}
-                  className="nav-link"
-                  aria-current="page"
-                  style={{ color }}>
-                  Home
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink to={"/recipes"} className="nav-link" style={{ color }}>
-                  Recepies
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink to={"/about"} className="nav-link" style={{ color }}>
-                  About
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink to={"/contact"} className="nav-link" style={{ color }}>
-                  Contact
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink
-                  to={"/viewcoffee/new"}
-                  className="nav-link"
-                  style={{ color }}>
-                  New recipe
-                </NavLink>
-              </li>
+              <NavbarLi />
             </ul>
             <SearchBox onChange={onChange} value={value} />
           </div>
