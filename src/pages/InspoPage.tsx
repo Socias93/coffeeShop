@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { deleteVideo, getVideos } from "../services/fakeInspoService";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 function InspoPage() {
+  const { searchValue } = useOutletContext<{ searchValue: string }>();
   const [videos, setVideos] = useState(getVideos());
+
   const navigate = useNavigate();
 
   function onDelete(id: string) {
@@ -11,6 +13,12 @@ function InspoPage() {
     setVideos(newVideo);
     deleteVideo(id);
   }
+
+  const filtredVideos = searchValue
+    ? videos.filter((v) =>
+        v.title.toLowerCase().includes(searchValue.toLowerCase())
+      )
+    : videos;
 
   if (videos.length === 0)
     return (
@@ -33,7 +41,7 @@ function InspoPage() {
       <div className="container-lg px-3 py-3">
         <h1 className="text-center m-3">{coffeeMugg} Coffee inspo</h1>
         <div className="d-flex row row-cols-1 row-cols-sm-1 row-cols-md-3 justify-content-center g-5">
-          {videos.map((video) => (
+          {filtredVideos.map((video) => (
             <div key={video.id} className="col d-flex justify-content-center">
               <div
                 className="shadow-sm m-1 justify-content-center border border-dark rounded-4 d-flex flex-column w-100 h-100"
