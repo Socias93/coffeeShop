@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { SearchBox } from "./index";
-import NavbarButtom from "./NavbarButtom";
+import { SearchBox, NavbarButtom } from "./index";
 
 interface Props {
   value: string;
