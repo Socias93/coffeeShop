@@ -5,7 +5,9 @@ import { useOutletContext } from "react-router-dom";
 
 function CoffeePage() {
   const [recipes, setRecipes] = useState(getRecipes());
-  const { searchValue } = useOutletContext<{ searchValue: string }>();
+  const { searchValue } = useOutletContext<{
+    searchValue: string;
+  }>();
 
   function handleDelete(id: string) {
     const newRecipy = recipes.filter((r) => r.id !== id);

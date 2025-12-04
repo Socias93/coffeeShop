@@ -3,9 +3,10 @@ import { deleteVideo, getVideos } from "../services/fakeInspoService";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
 function InspoPage() {
-  const { searchValue } = useOutletContext<{ searchValue: string }>();
+  const { searchValue } = useOutletContext<{
+    searchValue: string;
+  }>();
   const [videos, setVideos] = useState(getVideos());
-
   const navigate = useNavigate();
 
   function onDelete(id: string) {
