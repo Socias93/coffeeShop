@@ -1,4 +1,5 @@
 import { formData } from "../pages/schemas/CoffesSchema";
+import { Category, getCategories } from "../services/fakeCategoryService";
 import CoffeeLabels from "./CoffeeLabels";
 
 interface Props {
@@ -7,9 +8,11 @@ interface Props {
   handleSubmit: any;
   register: any;
   errors: any;
+  categories: Category[];
 }
 
 function CoffeeForm({ onSubmit, errors, register, handleSubmit, id }: Props) {
+  const category = getCategories();
   return (
     <>
       <form
@@ -25,7 +28,11 @@ function CoffeeForm({ onSubmit, errors, register, handleSubmit, id }: Props) {
         <div
           className="d-grid shadow-lg rounded-4 p-4 bg-dark justify-content-center"
           style={{ maxWidth: 350 }}>
-          <CoffeeLabels errors={errors} register={register} />
+          <CoffeeLabels
+            errors={errors}
+            register={register}
+            categories={category}
+          />
           <div className="text-center mt-3">
             {id === "new" ? (
               <button type="submit" className="btn btn-outline-light">

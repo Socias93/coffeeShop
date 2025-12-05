@@ -1,9 +1,12 @@
+import { Category } from "../services/fakeCategoryService";
+
 interface Props {
   register: any;
   errors: any;
+  categories: Category[];
 }
 
-function CoffeeLabels({ errors, register }: Props) {
+function CoffeeLabels({ errors, register, categories }: Props) {
   return (
     <>
       <div className="mb-3">
@@ -17,6 +20,23 @@ function CoffeeLabels({ errors, register }: Props) {
         <input {...register("description")} className="form-control" />
         {errors.description && (
           <p className="text-danger">{errors.description.message}</p>
+        )}
+      </div>
+
+      <div className="mb-3 mt-3">
+        <select
+          {...register("categoryId")}
+          id="disabledSelect"
+          className="form-select">
+          <option value="">Category</option>
+          {categories.map((category) => (
+            <option value={category.id} key={category.id}>
+              {category.name}
+            </option>
+          ))}
+        </select>
+        {errors.categoryId && (
+          <p className="text-danger">{errors.categoryId.message}</p>
         )}
       </div>
 

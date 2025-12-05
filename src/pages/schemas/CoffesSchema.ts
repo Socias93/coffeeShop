@@ -5,6 +5,8 @@ export const schema = z.object({
   title: z
     .string({ error: "You need to add a title" })
     .min(1, { message: "Title is mandatory" }),
+  categoryId: z.string({ error: "Category is required" }),
+
   description: z
     .string({ error: "You need to add a decription" })
     .min(1, { message: "Decription is required" }),
