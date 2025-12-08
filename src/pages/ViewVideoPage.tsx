@@ -13,10 +13,13 @@ function ViewVideoPage() {
     formState: { errors },
   } = useForm<videoData>({ resolver: zodResolver(schema) });
 
-  function onSubmit(data: videoData) {
-    console.log("Submitted", data);
-    saveVideo(data);
-    navigate("/inspo");
+  async function onSubmit(data: videoData) {
+    try {
+      await saveVideo(data);
+      navigate("/inspo");
+    } catch (err) {
+      console.error("Save failed", err);
+    }
   }
 
   const inputErrors = `form-control bg-${

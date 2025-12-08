@@ -31,6 +31,7 @@ function ViewCoffeePage() {
           id: "",
           title: "",
           description: "",
+          categoryId: "",
           ingredients: "",
           imageUrl: "",
         });
@@ -50,7 +51,7 @@ function ViewCoffeePage() {
     return {
       id: recipe.id,
       title: recipe.title,
-      category: recipe.category,
+      categoryId: recipe.category?.id,
       description: recipe.description,
       ingredients: recipe.ingredients,
       imageUrl: recipe.imageUrl,
