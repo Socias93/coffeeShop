@@ -1,4 +1,5 @@
-import { Category } from "./fakeCategoryService";
+import axios from "axios";
+import { Category } from "./CategoryService";
 
 export type Recipe = {
   id: string;
@@ -21,62 +22,10 @@ export interface RecipeData {
   image?: string;
 }
 
-let recipes: Recipe[] = [
-  {
-    id: "1",
-    title: "Cappuccino",
-    description: "Espresso, steamed milk, foam.",
-    ingredients: "1/3 cup espresso  1/3 cup steamed milk 1/3 cup milk foam",
+const BASE_URL = "http://localhost:5555/api/recipes";
 
-    steps: "Brew espresso Steam milk Spoon foam on top",
-    imageUrl: "/bilder/cappuccino.jpg",
-    category: { id: "specialty", name: "Specialty" },
-
-    liked: true,
-  },
-  {
-    id: "2",
-    title: "Espresso",
-    description: "Rich and concentrated shot.",
-    ingredients: "18g ground coffee Water 92–96°C",
-    steps: "Tamp firmly Extract 25–30s",
-    imageUrl: "/bilder/espresso.webp",
-    category: { id: "espresso", name: "Espresso" },
-    liked: false,
-  },
-  {
-    id: "3",
-    title: "Cold Brew",
-    description: "Smooth, low-acidity cold extraction.",
-    ingredients: "80g coarse coffee 1L cold water",
-    steps: "Combine Steep 12–18h Filter & serve over ice",
-    imageUrl: "/bilder/coldbrew.webp",
-    category: { id: "cold", name: "Cold" },
-
-    liked: false,
-  },
-  {
-    id: "4",
-    title: "Latte",
-    description: "Espresso,steamed milk and foam.",
-    ingredients: "1 shot espresso 200ml steamed milk Thin milk foam",
-    steps:
-      "Brew espresso Steam milk Pour milk over espresso Top with thin foam",
-    imageUrl: "/bilder/latte2.jpg",
-    category: { id: "milk", name: "Milk Based" },
-
-    liked: false,
-  },
-];
-
-export function getRecipes(query?: string): Recipe[] {
-  if (!query) return recipes;
-  const q = query.toLowerCase();
-  return recipes.filter(
-    (r) =>
-      r.title.toLowerCase().includes(q) ||
-      r.description.toLowerCase().includes(q)
-  );
+export function getRecipes() {
+  return axios.get<Recipe[]>(BASE_URL);
 }
 
 export function getRecipe(id: string): Recipe | undefined {

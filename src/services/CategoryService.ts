@@ -7,7 +7,6 @@ export interface Category {
 
 const BASE_URL = "http://localhost:5555/api/categories";
 
-// tidigare: return axios.get<Category[]>(BASE_URL);
 export function getCategories() {
   return axios.get<Category[]>(BASE_URL);
 }

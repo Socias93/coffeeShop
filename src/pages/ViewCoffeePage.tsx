@@ -8,7 +8,7 @@ import {
   Recipe,
   saveRecipe,
 } from "../services/fakeCoffeeRecipeService";
-import { Category, getCategories } from "../services/fakeCategoryService";
+import { Category, getCategories } from "../services/CategoryService";
 
 function ViewCoffeePage() {
   const { id } = useParams();

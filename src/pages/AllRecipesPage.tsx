@@ -1,7 +1,18 @@
-import { getRecipes } from "../services/fakeCoffeeRecipeService";
+import { useEffect, useState } from "react";
+import { getRecipes, Recipe } from "../services/fakeCoffeeRecipeService";
 
 function AllRecipesPage() {
-  const recipes = getRecipes();
+  const [recipes, setRecipes] = useState<Recipe[]>([]);
+
+  useEffect(() => {
+    async function fetch() {
+      const { data: recipes } = await getRecipes();
+
+      setRecipes(recipes);
+      console.log(recipes);
+    }
+    fetch();
+  }, []);
   return (
     <>
       <div className="vh-100" style={{ backgroundColor: "#121212" }}>
