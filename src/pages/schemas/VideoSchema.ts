@@ -6,7 +6,9 @@ export const schema = z.object({
   videoUrl: z.string().min(1, {
     message: "Videourl is required",
   }),
-  imageUrl: z.string().min(1, { message: "Imageurl is required" }),
+  imageUrl: z
+    .instanceof(FileList)
+    .refine((fl) => fl.length > 0, { message: "Image is required" }),
 });
 
 export type videoData = z.infer<typeof schema>;

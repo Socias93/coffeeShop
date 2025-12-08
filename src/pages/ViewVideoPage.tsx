@@ -4,6 +4,9 @@ import { useForm } from "react-hook-form";
 import VideoHeaderImage from "./VideoHeaderImage";
 import { useNavigate } from "react-router-dom";
 import { saveVideo } from "../services/InspoService";
+import axios from "axios";
+
+const CLOUDINARY_API = "https://api.cloudinary.com/v1_1/dyqpakdse/image/upload";
 
 function ViewVideoPage() {
   const navigate = useNavigate();
@@ -15,7 +18,12 @@ function ViewVideoPage() {
 
   async function onSubmit(data: videoData) {
     try {
-      await saveVideo(data);
+      const cloudinaryUrl = CLOUDINARY_API;
+      const formData = new FormData();
+      formData.append("file", data.imageUrl[0]);
+      formData.append("upload_preset", "leyebrary");
+      const respone = await axios.post(cloudinaryUrl, formData);
+      await saveVideo({ ...data, imageUrl: respone.data.secure_url });
       navigate("/inspo");
     } catch (err) {
       console.error("Save failed", err);
@@ -65,7 +73,7 @@ function ViewVideoPage() {
               <input
                 {...register("imageUrl")}
                 className={inputErrors}
-                type="text"
+                type="file"
               />
               {errors.imageUrl && (
                 <p className="text-danger">{errors.imageUrl.message} </p>

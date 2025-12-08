@@ -1,4 +1,3 @@
-import "./index.css";
 import "./app.css";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
