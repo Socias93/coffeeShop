@@ -5,11 +5,15 @@ import { formData, schema } from "./schemas/CoffesSchema";
 import { useEffect, useState } from "react";
 import { getRecipe, Recipe, saveRecipe } from "../services/CoffeeRecipeService";
 import { Category, getCategories } from "../services/CategoryService";
+import axios from "axios";
+
+const CLOUDINARY_API = "https://api.cloudinary.com/v1_1/dyqpakdse/image/upload";
 
 function ViewCoffeePage() {
   const { id } = useParams();
   const [recipe, setRecipe] = useState<Recipe>();
   const [categories, setCategories] = useState<Category[]>([]);
+
   const navigate = useNavigate();
   const {
     reset,
@@ -33,7 +37,6 @@ function ViewCoffeePage() {
           description: "",
           categoryId: "",
           ingredients: "",
-          imageUrl: "",
         });
         return;
       }
@@ -54,13 +57,18 @@ function ViewCoffeePage() {
       categoryId: recipe.category?.id,
       description: recipe.description,
       ingredients: recipe.ingredients,
-      imageUrl: recipe.imageUrl,
+      imageUrl: undefined,
     };
   }
 
-  function onSubmit(data: formData) {
+  async function onSubmit(data: formData) {
     console.log("Submitted", data);
-    saveRecipe(data);
+    const cloudinaryUrl = CLOUDINARY_API;
+    const formData = new FormData();
+    formData.append("file", data.imageUrl[0]);
+    formData.append("upload_preset", "leyebrary");
+    const respone = await axios.post(cloudinaryUrl, formData);
+    await saveRecipe({ ...data, imageUrl: respone.data.secure_url });
     navigate("/");
   }
 
@@ -73,14 +81,22 @@ function ViewCoffeePage() {
               {id === "new" ? (
                 <img
                   className="img-fluid shadow-lg rounded-4 mb-3 hero-img"
-                  src={recipe?.imageUrl ?? "/bilder/4coffee.webp"}
+                  src={
+                    recipe?.imageUrl instanceof FileList
+                      ? URL.createObjectURL(recipe.imageUrl[0])
+                      : recipe?.imageUrl ?? "/bilder/4coffee.webp"
+                  }
                   alt="Coffee Picture"
                 />
               ) : (
                 <>
                   <img
                     className="w-100 shadow-lg rounded-4 mb-3"
-                    src={recipe?.imageUrl}
+                    src={
+                      recipe?.imageUrl instanceof FileList
+                        ? URL.createObjectURL(recipe.imageUrl[0])
+                        : recipe?.imageUrl ?? "/bilder/4coffee.webp"
+                    }
                     alt="Coffee Picture"
                     style={{ objectFit: "cover", maxHeight: "400px" }}
                   />
@@ -110,7 +126,9 @@ function ViewCoffeePage() {
                     Create a Recipe
                   </h4>
                 ) : (
-                  <h4 className="mt-4 text-light text-center">Recipe {id}</h4>
+                  <h4 className="mt-4 text-light text-center">
+                    Recipe {recipe?.title}
+                  </h4>
                 )}
 
                 <div
@@ -167,7 +185,7 @@ function ViewCoffeePage() {
                     <label className="form-label text-light">Image</label>
                     <input
                       {...register("imageUrl")}
-                      type="text"
+                      type="file"
                       className="form-control"
                     />
                     {errors.imageUrl && (

@@ -19,10 +19,10 @@ function InspoPage() {
     fetch();
   }, []);
 
-  function onDelete(id: string) {
+  async function onDelete(id: string) {
     const newVideo = videos.filter((video) => video.id !== id);
     setVideos(newVideo);
-    deleteVideo(id);
+    await deleteVideo(id);
   }
 
   const filtredVideos = searchValue

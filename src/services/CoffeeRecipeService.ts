@@ -8,7 +8,7 @@ export type Recipe = {
   description: string;
   ingredients?: string;
   steps?: string;
-  imageUrl: string;
+  imageUrl?: string | FileList;
   category?: Category;
   liked?: boolean;
 };
@@ -20,7 +20,7 @@ export interface RecipeData {
   ingredients: string[];
   category: Category;
   steps?: string;
-  image?: string;
+  image?: string | FileList;
 }
 
 const BASE_URL = "http://localhost:5555/api/recipes";

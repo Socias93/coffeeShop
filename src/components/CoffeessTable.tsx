@@ -20,11 +20,16 @@ function CoffeesTable({ onDelete, recipes, onLike }: Props) {
               <div className="p-3 border border-dark rounded-4 m-3">
                 <div className="position-relative">
                   <img
-                    src={r.imageUrl}
+                    src={
+                      r.imageUrl instanceof FileList
+                        ? URL.createObjectURL(r.imageUrl[0])
+                        : r.imageUrl ?? "/bilder/4coffee.webp"
+                    }
                     alt="Coffee image"
                     className="img-fluid w-100 rounded-3"
                     style={{ height: 150, objectFit: "cover" }}
                   />
+
                   <div className="position-absolute top-0 end-0 p-2">
                     <Favorite
                       isLiked={Boolean(r.liked)}

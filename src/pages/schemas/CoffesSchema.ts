@@ -14,8 +14,8 @@ export const schema = z.object({
     .string({ error: "You need to add a ingredient" })
     .min(1, { message: "Ingredient is required" }),
   imageUrl: z
-    .string({ error: "You need to add a image" })
-    .min(1, { message: "Image is required" }),
+    .instanceof(FileList)
+    .refine((fl) => fl.length > 0, { message: "Image is required" }),
 });
 
 export type formData = z.infer<typeof schema>;
