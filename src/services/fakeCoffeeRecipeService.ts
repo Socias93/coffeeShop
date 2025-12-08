@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Category } from "./CategoryService";
+import { formData } from "../pages/schemas/CoffesSchema";
 
 export type Recipe = {
   id: string;
@@ -29,42 +30,17 @@ export function getRecipes() {
 }
 
 export function getRecipe(id: string) {
-  return axios.get(`${BASE_URL}/${id}`);
+  return axios.get<Recipe>(`${BASE_URL}/${id}`);
 }
 
-export function saveRecipe(
-  recipe: Partial<Recipe> & { title: string; imageUrl: string }
-): Recipe {
-  let recipeInDb = recipes.find((r) => r.id === recipe.id) as
-    | Recipe
-    | undefined;
-
-  if (recipeInDb) {
-    recipeInDb.title = recipe.title;
-    recipeInDb.description = recipe.description ?? recipeInDb.description;
-    recipeInDb.ingredients = recipe.ingredients ?? recipeInDb.ingredients;
-    recipeInDb.imageUrl = recipe.imageUrl ?? recipeInDb.imageUrl;
-    recipeInDb.category = recipe.category ?? recipeInDb.category;
-    return recipeInDb;
+export function saveRecipe(form: formData) {
+  if (form.id) {
+    return axios.put<Recipe>(`${BASE_URL}/${form.id}`, form);
+  } else {
+    return axios.post<Recipe[]>(BASE_URL, form);
   }
-
-  const newRecipe: Recipe = {
-    id: Date.now().toString(),
-    title: recipe.title,
-    description: recipe.description ?? "",
-    ingredients: recipe.ingredients,
-    steps: recipe.steps,
-    imageUrl: recipe.imageUrl,
-    category: recipe.category,
-    liked: !!recipe.liked,
-  };
-
-  recipes = [newRecipe, ...recipes];
-  return newRecipe;
 }
 
-export function deleteRecipe(id: string): Recipe | undefined {
-  const recipeInDb = recipes.find((r) => r.id === id);
-  recipes = recipes.filter((r) => r.id !== id);
-  return recipeInDb;
+export function deleteRecipe(id: string) {
+  return axios.delete<Recipe[]>(`${BASE_URL}/${id}`);
 }
