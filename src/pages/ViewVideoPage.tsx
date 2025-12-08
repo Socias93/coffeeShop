@@ -3,7 +3,7 @@ import { schema, videoData } from "./schemas/VideoSchema";
 import { useForm } from "react-hook-form";
 import VideoHeaderImage from "./VideoHeaderImage";
 import { useNavigate } from "react-router-dom";
-import { saveVideo } from "../services/fakeInspoService";
+import { saveVideo } from "../services/InspoService";
 
 function ViewVideoPage() {
   const navigate = useNavigate();

@@ -3,11 +3,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formData, schema } from "./schemas/CoffesSchema";
 import { useEffect, useState } from "react";
-import {
-  getRecipe,
-  Recipe,
-  saveRecipe,
-} from "../services/fakeCoffeeRecipeService";
+import { getRecipe, Recipe, saveRecipe } from "../services/CoffeeRecipeService";
 import { Category, getCategories } from "../services/CategoryService";
 
 function ViewCoffeePage() {

@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  deleteVideo,
-  getVideos,
-  InspoVideo,
-} from "../services/fakeInspoService";
+import { deleteVideo, getVideos, InspoVideo } from "../services/InspoService";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
 function InspoPage() {

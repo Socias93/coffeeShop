@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Recipe } from "../services/fakeCoffeeRecipeService";
+import { Recipe } from "../services/CoffeeRecipeService";
 import { Favorite } from "./index";
 
 interface Props {

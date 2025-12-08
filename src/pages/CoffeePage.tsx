@@ -3,7 +3,7 @@ import {
   deleteRecipe,
   getRecipes,
   Recipe,
-} from "../services/fakeCoffeeRecipeService";
+} from "../services/CoffeeRecipeService";
 import { HeaderImage, CoffeeInfo, CoffeessTable } from "../components/index";
 import { useOutletContext } from "react-router-dom";
 
