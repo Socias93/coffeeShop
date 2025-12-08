@@ -26,27 +26,28 @@ function ViewCoffeePage() {
     async function fetch() {
       const { data: categories } = await getCategories();
       setCategories(categories);
+
+      if (!id) return;
+
+      if (id === "new") {
+        setRecipe(undefined);
+        reset({
+          id: "",
+          title: "",
+          description: "",
+          ingredients: "",
+          imageUrl: "",
+        });
+        return;
+      }
+
+      const { data: recipe } = await getRecipe(id);
+      if (!recipe) return;
+
+      setRecipe(recipe);
+      reset(mapToFormData(recipe));
     }
     fetch();
-    if (!id) return;
-
-    if (id === "new") {
-      setRecipe(undefined);
-      reset({
-        id: "",
-        title: "",
-        description: "",
-        ingredients: "",
-        imageUrl: "",
-      });
-      return;
-    }
-
-    const recipe = getRecipe(id);
-    if (!recipe) return;
-
-    setRecipe(recipe);
-    reset(mapToFormData(recipe));
   }, [reset, id]);
 
   function mapToFormData(recipe: Recipe) {

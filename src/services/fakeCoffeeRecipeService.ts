@@ -28,8 +28,8 @@ export function getRecipes() {
   return axios.get<Recipe[]>(BASE_URL);
 }
 
-export function getRecipe(id: string): Recipe | undefined {
-  return recipes.find((r) => r.id === id);
+export function getRecipe(id: string) {
+  return axios.get(`${BASE_URL}/${id}`);
 }
 
 export function saveRecipe(
