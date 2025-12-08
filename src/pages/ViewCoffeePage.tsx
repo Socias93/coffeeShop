@@ -8,11 +8,12 @@ import {
   Recipe,
   saveRecipe,
 } from "../services/fakeCoffeeRecipeService";
-import CoffeeForm from "../components/CoffeForm";
+import { Category, getCategories } from "../services/fakeCategoryService";
 
 function ViewCoffeePage() {
   const { id } = useParams();
   const [recipe, setRecipe] = useState<Recipe>();
+  const [categories, setCategories] = useState<Category[]>([]);
   const navigate = useNavigate();
   const {
     reset,
@@ -22,6 +23,11 @@ function ViewCoffeePage() {
   } = useForm<formData>({ resolver: zodResolver(schema) });
 
   useEffect(() => {
+    async function fetch() {
+      const { data: categories } = await getCategories();
+      setCategories(categories);
+    }
+    fetch();
     if (!id) return;
 
     if (id === "new") {
@@ -47,6 +53,7 @@ function ViewCoffeePage() {
     return {
       id: recipe.id,
       title: recipe.title,
+      category: recipe.category,
       description: recipe.description,
       ingredients: recipe.ingredients,
       imageUrl: recipe.imageUrl,
@@ -96,13 +103,92 @@ function ViewCoffeePage() {
               </div>
             </div>
             <div className="col-12 col-md-5 d-grid justify-content-center">
-              <CoffeeForm
-                onSubmit={onSubmit}
-                errors={errors}
-                handleSubmit={handleSubmit}
-                id={id}
-                register={register}
-              />
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                className="w-100"
+                style={{ maxWidth: 700 }}>
+                {id === "new" ? (
+                  <h4 className="mb-3 mt-4 text-light text-center">
+                    Create a Recipe
+                  </h4>
+                ) : (
+                  <h4 className="mt-4 text-light text-center">Recipe {id}</h4>
+                )}
+
+                <div
+                  className="d-grid shadow-lg rounded-4 p-4 bg-dark justify-content-center"
+                  style={{ maxWidth: 350 }}>
+                  <div className="mb-3">
+                    <label className="form-label text-light">Title</label>
+                    <input {...register("title")} className="form-control" />
+                    {errors.title && (
+                      <p className="text-danger">{errors.title.message}</p>
+                    )}
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label text-light">Description</label>
+                    <input
+                      {...register("description")}
+                      className="form-control"
+                    />
+                    {errors.description && (
+                      <p className="text-danger">
+                        {errors.description.message}
+                      </p>
+                    )}
+                  </div>
+                  <div className="mb-3 mt-3">
+                    <select
+                      {...register("categoryId")}
+                      id="disabledSelect"
+                      className="form-select">
+                      <option value="">Category</option>
+                      {categories.map((category) => (
+                        <option value={category.id} key={category.id}>
+                          {category.name}
+                        </option>
+                      ))}
+                    </select>
+                    {errors.categoryId && (
+                      <p className="text-danger">{errors.categoryId.message}</p>
+                    )}
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label text-light">Ingredients</label>
+                    <input
+                      {...register("ingredients")}
+                      className="form-control"
+                    />
+                    {errors.ingredients && (
+                      <p className="text-danger">
+                        {errors.ingredients.message}
+                      </p>
+                    )}
+                  </div>
+                  <div className="mb-3">
+                    <label className="form-label text-light">Image</label>
+                    <input
+                      {...register("imageUrl")}
+                      type="text"
+                      className="form-control"
+                    />
+                    {errors.imageUrl && (
+                      <p className="text-danger">{errors.imageUrl.message}</p>
+                    )}
+                  </div>{" "}
+                  <div className="text-center mt-3">
+                    {id === "new" ? (
+                      <button type="submit" className="btn btn-outline-light">
+                        Save
+                      </button>
+                    ) : (
+                      <button type="submit" className="btn btn-outline-light">
+                        Update
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
         </div>

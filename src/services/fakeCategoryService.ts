@@ -1,15 +1,13 @@
+import axios from "axios";
+
 export interface Category {
   id: string;
   name: string;
 }
 
-const categories: Category[] = [
-  { id: "espresso", name: "Espresso" },
-  { id: "milk", name: "Milk Based" },
-  { id: "cold", name: "Cold" },
-  { id: "specialty", name: "Specialty" },
-];
+const BASE_URL = "http://localhost:5555/api/categories";
 
-export function getCategories(): Category[] {
-  return categories;
+// tidigare: return axios.get<Category[]>(BASE_URL);
+export function getCategories() {
+  return axios.get<Category[]>(BASE_URL);
 }
