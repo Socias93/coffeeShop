@@ -1,13 +1,27 @@
-import { useState } from "react";
-import { deleteVideo, getVideos } from "../services/fakeInspoService";
+import { useEffect, useState } from "react";
+import {
+  deleteVideo,
+  getVideos,
+  InspoVideo,
+} from "../services/fakeInspoService";
 import { useNavigate, useOutletContext } from "react-router-dom";
 
 function InspoPage() {
   const { searchValue } = useOutletContext<{
     searchValue: string;
   }>();
-  const [videos, setVideos] = useState(getVideos());
+  const [videos, setVideos] = useState<InspoVideo[]>([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetch() {
+      const { data: videos } = await getVideos();
+
+      setVideos(videos);
+    }
+
+    fetch();
+  }, []);
 
   function onDelete(id: string) {
     const newVideo = videos.filter((video) => video.id !== id);

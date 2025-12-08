@@ -23,7 +23,6 @@ function AllRecipesPage() {
               <th scope="col">Category</th>
               <th scope="col">Ingridience</th>
               <th scope="col">Description</th>
-              <th>Steps</th>
             </tr>
           </thead>
           <tbody>
