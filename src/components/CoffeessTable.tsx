@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import { Recipe } from "../services/CoffeeRecipeService";
+import { getRecipes, Recipe } from "../services/CoffeeRecipeService";
 import { Favorite } from "./index";
+import { useEffect, useState } from "react";
 
 interface Props {
   onDelete(id: string): void;
@@ -9,7 +10,20 @@ interface Props {
 }
 
 function CoffeesTable({ onDelete, recipes, onLike }: Props) {
+  const [newRecipes, setNewRecipes] = useState<Recipe[]>([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    async function fetch() {
+      const { data: recipes } = await getRecipes();
+
+      if (!recipes) return;
+
+      setNewRecipes(newRecipes);
+    }
+
+    fetch();
+  }, []);
 
   return (
     <>
