@@ -13,8 +13,8 @@ export function getVideos() {
   return axios.get<InspoVideo[]>(BASE_URL);
 }
 
-export function getVideo(id: string): InspoVideo | undefined {
-  return videos.find((v) => v.id === id);
+export function getVideo(id: string) {
+  return axios.get<InspoVideo>(`${BASE_URL}/${id}`);
 }
 
 export function saveVideo(
@@ -37,8 +37,6 @@ export function saveVideo(
   return newVideo;
 }
 
-export function deleteVideo(id: string): InspoVideo | undefined {
-  const v = videos.find((x) => x.id === id);
-  videos = videos.filter((x) => x.id !== id);
-  return v;
+export function deleteVideo(id: string) {
+  return axios.delete(`${BASE_URL}/${id}`);
 }
